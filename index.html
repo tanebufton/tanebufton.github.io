@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesh pids</title>
+    <style>
+        textarea{width: 250px;
+            height:200px
+        }
+        </style>
+        
+    <script>
+    
+        window.Clipboard = (function(window, document, navigator) {
+        var textArea,
+            copy;
+
+        function isOS() {
+            return navigator.userAgent.match(/ipad|iphone/i);
+        }
+
+        function createTextArea(text) {
+            textArea = document.createElement('textArea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+        }
+
+        function selectText() {
+            var range,
+                selection;
+
+            if (isOS()) {
+                range = document.createRange();
+                range.selectNodeContents(textArea);
+                selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+                textArea.setSelectionRange(0, 999999);
+            } else {
+                textArea.select();
+            }
+        }
+
+        function copyToClipboard() {        
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+        }
+
+        copy = function(text) {
+            createTextArea(text);
+            selectText();
+            copyToClipboard();
+        };
+
+        return {
+            copy: copy
+        };
+    })(window, document, navigator);
+    
+        function loadPids() {
+            
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var pids = urlParams.get('pids')
+            var pidList = pids.split(",")
+            var pidString = pidList.join("\n")
+
+            const el = document.getElementById('pidsTextArea');
+            el.value = pidString;
+
+
+
+        }
+        function copyPids() {
+            setTimeout(function(){  
+                Clipboard.copy(document.getElementById('pidsTextArea').value)
+                alert("Copied pids: \n "+document.getElementById('pidsTextArea').value)
+            }, 200);
+        }
+    
+
+        
+
+    </script>
+</head>
+<body onload = "loadPids()">
+    
+
+    <textarea id ="pidsTextArea">
+
+    </textarea>
+
+
+    <button  id = "copyButton"  onclick="copyPids()">Copy pids</button>
+</body>
+</html>
