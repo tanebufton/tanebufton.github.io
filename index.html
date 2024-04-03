@@ -61,18 +61,21 @@
     })(window, document, navigator);
     
         function loadPids() {
-            
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            var pids = urlParams.get('pids')
-            var pidList = pids.split(",")
-            var pidString = pidList.join("\n")
-
+            var pids = urlParams.get('pids');
+            var pidList = pids.split(",");
+            var pidString = pidList.join("\n");
+        
             const el = document.getElementById('pidsTextArea');
             el.value = pidString;
-
-
-
+        
+            const baseUrl = 'http://127.0.0.1:8532/quicktasks?site=JdsportsBackend&region=NZ&id=';
+            var urlLinks = pidList.map(pid => `<a href="${baseUrl}${pid}">${pid}</a>`);
+            var urlLinksString = urlLinks.join("<br>");
+        
+            const urlEl = document.getElementById('urlLinks');
+            urlEl.innerHTML = urlLinksString;
         }
         function copyPids() {
             setTimeout(function(){  
@@ -95,5 +98,9 @@
 
 
     <button  id = "copyButton"  onclick="copyPids()">Copy pids</button>
+    <br><br>
+    <div id="urlLinks"></div>
+    <body onload="loadPids()">
+    <!-- Your HTML content here -->
 </body>
 </html>
