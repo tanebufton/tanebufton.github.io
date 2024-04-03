@@ -71,11 +71,11 @@
             el.value = pidString;
         
             const baseUrl = 'http://127.0.0.1:8532/quicktasks?site=JdsportsBackend&region=NZ&id=';
-            var urlLinks = pidList.map(pid => `<a href="${baseUrl}${pid}">${pid}</a>`);
-            var urlLinksString = urlLinks.join("<br>");
+            var combinedUrl = baseUrl + pidList.join(',');
         
-            const urlEl = document.getElementById('urlLinks');
-            urlEl.innerHTML = urlLinksString;
+            const urlEl = document.getElementById('urlLink');
+            urlEl.href = combinedUrl;
+            urlEl.textContent = 'Adonis quicktasks';
         }
         function copyPids() {
             setTimeout(function(){  
@@ -99,8 +99,8 @@
 
     <button  id = "copyButton"  onclick="copyPids()">Copy pids</button>
     <br><br>
-    <div id="urlLinks"></div>
+    <a id="urlLink" href="#">Adonis quicktasks</a>
     <body onload="loadPids()">
     <!-- Your HTML content here -->
-</body>
+</body>>
 </html>
