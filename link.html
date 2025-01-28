@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Here</title>
+    <script>
+        function navigate() {
+            const part1 = "https://teamevent.flicket.co.nz/events/";
+            const part2 = "f08b19de-0cff-4137-a252-8652c69b3804/";
+            const part3 = "reservation?release=d277ba55-ccae-4c3d-a385-b5aa0c644d28";
+            const fullUrl = part1 + part2 + part3;
+            window.location.href = fullUrl;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="navigate()">Click here</button>
+</body>
+</html>
